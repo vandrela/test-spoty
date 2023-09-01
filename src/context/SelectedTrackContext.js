@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useCallback } from "react";
 
 export const SelectedTrackContext = createContext();
 
@@ -9,33 +9,33 @@ export const SelectedTrackProvider = ({ children }) => {
   const [trackList, setTrackList] = useState([]);
   const [selectedTrackIndex, setSelectedTrackIndex] = useState(0);
 
-  const selectTrack = (track) => {
+  const selectTrack = useCallback((track) => {
     setSelectedTrack(track);
-  };
+  }, []);
 
-  const setTracks = (tracks) => {
+  const setTracks = useCallback((tracks) => {
     setTrackList(tracks);
-  };
+  }, []);
 
-  const setTrackIndex = (index) => {
+  const setTrackIndex = useCallback((index) => {
     setSelectedTrackIndex(index);
-  };
+  }, []);
 
-  const nextTrack = () => {
+  const nextTrack = useCallback(() => {
     if (selectedTrackIndex < trackList.length - 1) {
       console.log("Next Track Index:", selectedTrackIndex + 1);
-      setSelectedTrackIndex(selectedTrackIndex + 1);
+      setSelectedTrackIndex((prevIndex) => prevIndex + 1);
       setSelectedTrack(trackList[selectedTrackIndex + 1]);
     }
-  };
+  }, [selectedTrackIndex, trackList]);
 
-  const previousTrack = () => {
+  const previousTrack = useCallback(() => {
     if (selectedTrackIndex > 0) {
       console.log("Previous Track Index:", selectedTrackIndex - 1);
-      setSelectedTrackIndex(selectedTrackIndex - 1);
+      setSelectedTrackIndex((prevIndex) => prevIndex - 1);
       setSelectedTrack(trackList[selectedTrackIndex - 1]);
     }
-  };
+  }, [selectedTrackIndex, trackList]);
 
   return (
     <SelectedTrackContext.Provider

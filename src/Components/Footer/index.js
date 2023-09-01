@@ -23,6 +23,7 @@ function Footer() {
   } = useSelectedTrack();
 
   const [isShuffle, setIsShuffle] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
 
   const filteredTracks = discover_weekly.tracks.items.filter((item) => {
     const track = item.track;
@@ -64,11 +65,35 @@ function Footer() {
   };
 
   const toggleShuffle = () => {
-    setIsShuffle(!isShuffle);
     if (isShuffle) {
-      setTrackIndex(selectedTrackIndex);
+      setIsShuffle(false);
     } else {
-      shuffleTracks();
+      setIsShuffle(true);
+      setIsRepeat(false);
+    }
+  };
+
+  const toggleRepeat = () => {
+    setIsRepeat(!isRepeat);
+  };
+
+  const nextTrackWithRepeat = () => {
+    if (isRepeat) {
+      if (selectedTrackIndex === filteredTracks.length - 1) {
+        setTrackIndex(0);
+      } else {
+        nextTrack();
+      }
+    }
+  };
+
+  const previousTrackWithRepeat = () => {
+    if (isRepeat) {
+      if (selectedTrackIndex === 0) {
+        setTrackIndex(filteredTracks.length - 1);
+      } else {
+        previousTrack();
+      }
     }
   };
 
@@ -99,14 +124,35 @@ function Footer() {
             className={isShuffle ? "footer_green" : ""}
             onClick={toggleShuffle}
           />
-          <SkipPreviousIcon className="footer_icon" onClick={previousTrack} />
+          <SkipPreviousIcon
+            className="footer_icon"
+            onClick={
+              isRepeat
+                ? previousTrackWithRepeat
+                : isShuffle
+                ? shuffleTracks
+                : previousTrack
+            }
+          />
           <PlayCircleOutlineIcon
             fontSize="large"
             className="footer_icon"
             onClick={playTrack}
           />
-          <SkipNextIcon className="footer_icon" onClick={nextTrack} />
-          <RepeatIcon className="footer_green" />
+          <SkipNextIcon
+            className="footer_icon"
+            onClick={
+              isRepeat
+                ? nextTrackWithRepeat
+                : isShuffle
+                ? shuffleTracks
+                : nextTrack
+            }
+          />
+          <RepeatIcon
+            className={isRepeat ? "footer_green" : ""}
+            onClick={toggleRepeat}
+          />
         </div>
         <div className="footer_right">
           <Grid container spacing={2}>
