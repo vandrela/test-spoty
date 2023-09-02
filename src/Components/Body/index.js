@@ -1,5 +1,3 @@
-// Body.js
-
 import React, { useEffect } from "react";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import FavoriteIcon from "@material-ui/icons/Favorite";
