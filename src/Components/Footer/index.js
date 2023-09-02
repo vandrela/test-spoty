@@ -7,7 +7,7 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeDown";
 import { Grid, Slider } from "@material-ui/core";
-import { useSelectedTrack } from "../../context/SelectedTrackContext";
+import { useSelectedTrack } from "../../context/useSelectedTrack";
 import data from "../../mocks/data.json";
 
 import "./footer.styles.css";

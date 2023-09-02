@@ -1,6 +1,6 @@
 import React from "react";
 import Player from "./Components/Player";
-import { SelectedTrackProvider } from "./context/SelectedTrackContext.js";
+import { SelectedTrackProvider } from "./context/SelectedTrackProvider";
 
 import "./App.css";
 

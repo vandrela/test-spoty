@@ -7,7 +7,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import SongRow from "../SongRow";
 import Header from "../Header";
 import data from "../../mocks/data.json";
-import { useSelectedTrack } from "../../context/SelectedTrackContext";
+import { useSelectedTrack } from "../../context/useSelectedTrack";
 
 import "./body.styles.css";
 
